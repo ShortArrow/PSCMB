@@ -1,3 +1,4 @@
 @echo off
-pwsh -NoProfile -ExecutionPolicy Unrestricted "%userprofile%\Documents\CustomContextMenu\Create-Zip.ps1" %*
+cd "%userprofile%\Documents\CustomContextMenu\"
+pwsh -NoProfile -ExecutionPolicy Unrestricted Create-Zip.ps1 %*
 exit

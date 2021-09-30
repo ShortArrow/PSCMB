@@ -1,1 +1,1 @@
-7zArg -withPassword $true -Extension ".7z" -Files @($args)
+./7zArg.ps1 -withPassword -Extension ".7z" -Files $args
