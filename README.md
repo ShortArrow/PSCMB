@@ -12,7 +12,7 @@ This software extends the Windows context menu. And a tool created with powershe
 ## Installation
 
 Download archive from release page, And unzip.
-Then, please run `Install-To-ContextMenu.ps1`.
+Then, please run `./bin/Install-To-ContextMenu.ps1`.
 
 ## Contribute
 
