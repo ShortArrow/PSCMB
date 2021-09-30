@@ -19,3 +19,18 @@ foreach ($child in $children) {
     }
     Copy-Item -Path $child -Destination $Distination -Force
 }
+
+$finishTitle = "7zip Multi"
+$finishMessage = 'Install Finished, Celebrate!'
+if ([environment]::OSVersion.Version.Major -ge 10 ) {
+    $ToastModulePath = $env:USERPROFILE + "\Documents\PowerShell\Modules\BurntToast"
+    if (!(Test-Path $ToastModulePath)) {
+        Copy-Item -Destination $ToastModulePath -LiteralPath ".\BurntToast\BurntToast" -Force -Recurse
+    }
+    Import-Module BurntToast
+    New-BurntToastNotification -AppLogo $($(Get-Location).Path + "\7zip.png") -Text $finishTitle, $finishMessage
+}
+else {
+    $ws = New-Object -com Wscript.Shell
+    $ws.Popup($finishMessage, 0, $finishTitle, 0)
+}
