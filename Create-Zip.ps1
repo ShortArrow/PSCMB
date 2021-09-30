@@ -1,0 +1,1 @@
+7zArg -withPassword $false -Extension ".zip" -Files @($args)

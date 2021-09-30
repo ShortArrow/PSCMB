@@ -1,0 +1,1 @@
+7zArg -withPassword $true -Extension ".7z" -Files @($args)
