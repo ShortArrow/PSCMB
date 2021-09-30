@@ -8,6 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: clone submodule
+      run: |
+        mkdir BurntToast \
+        cd BurntToast \
+        git init \
+        git config core.sparsecheckout true \
+        git remote add origin https://github.com/Windos/BurntToast.git \
+        echo BurntToast > .git/info/sparse-checkout \
+        git pull origin main \
+        cd ..
     - name: Archive Release
       uses: thedoctor0/zip-release@master
       with:
