@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: clone submodule
+    - name: clone submodule BurntToast
       run: |
         cd BurntToast
         git init
@@ -17,6 +17,10 @@ jobs:
         echo BurntToast > .git/info/sparse-checkout
         git pull origin main
         cd ..
+    - name: clone submodule SingleInstance
+      run: |
+        mkdir SingleInstance
+        curl https://github.com/zenden2k/context-menu-launcher/releases/latest/download/singleinstance.exe --output ./SingleInstance/singleinstance.exe
     - name: Archive Release
       uses: thedoctor0/zip-release@master
       with:
