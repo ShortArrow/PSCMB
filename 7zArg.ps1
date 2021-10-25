@@ -36,7 +36,7 @@ if ($withPassword) {
 foreach ($file in $Files) {
   $leafbase = Split-Path -LeafBase $file
   $parent = Split-Path -Parent $file
-  $payload = '7z a ' + $(Join-Path $parent ($leafbase + $Extension) ) + ' ' + $file + ' -y' + ($withPassword ? (' -p"' + $password + '"') :'')
+  $payload = '7z a "' + $(Join-Path $parent ($leafbase + $Extension) ) + '" "' + $file + '" -y' + ($withPassword ? (' -p"' + $password + '"') :'')
   Write-Host $payload
   Invoke-Expression $payload
 }
