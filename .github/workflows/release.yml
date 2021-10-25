@@ -20,7 +20,10 @@ jobs:
     - name: clone submodule SingleInstance
       run: |
         mkdir SingleInstance
-        curl https://github.com/zenden2k/context-menu-launcher/releases/latest/download/singleinstance.exe --output ./SingleInstance/singleinstance.exe
+        if curl -s -L "https://github.com/zenden2k/context-menu-launcher/releases/latest/download/singleinstance.exe" -o "./SingleInstance/singleinstance.exe"; then
+          echo downloaded
+        fi
+
     - name: Archive Release
       uses: thedoctor0/zip-release@master
       with:
