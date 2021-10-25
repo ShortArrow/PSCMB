@@ -84,3 +84,5 @@ else {
 }
 
 Remove-PSDrive -Name "HKCR" -Force
+
+Write-Host "Finish Setup"
