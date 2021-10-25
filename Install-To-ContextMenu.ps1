@@ -3,12 +3,12 @@ $HerePath = (Get-Location).Path
 # Get distination path
 $Distination = "$env:USERPROFILE/Documents/CustomContextMenu"
 $SendtoPath = "$env:APPDATA/Microsoft/Windows/SendTo"
-$RegistryShellRoot = "Registry::HKEY_CURRENT_ROOT/*/shell"
-$RegistryShellAppRoot = Join-Path $RegistryShellRoot -ChildPath "PSCMB"
-$RegistryShellAppCommandMultiZip = Join-Path $RegistryShellAppRoot -ChildPath "Multi zip"
-$RegistryShellAppCommandMultiZipWithPassword = Join-Path $RegistryShellAppRoot -ChildPath "Multi zip with password"
-$RegistryShellAppCommandMulti7z = Join-Path $RegistryShellAppRoot -ChildPath "Multi 7z"
-$RegistryShellAppCommandMulti7zWithPassword = Join-Path $RegistryShellAppRoot -ChildPath "Multi 7z with password"
+$RegistryShellRoot = "HKCR:/*/shell"
+$RegistryShellAppRootName = "PSCMB"
+$RegistryShellAppCommandMultiZipName = "Make zips"
+$RegistryShellAppCommandMultiZipWithPasswordName = "Make zips with password"
+$RegistryShellAppCommandMulti7zName = "Make 7zips"
+$RegistryShellAppCommandMulti7zWithPasswordName = "Make 7zips with password"
 
 if (Test-Path $Distination) {
 
@@ -25,6 +25,29 @@ foreach ($child in $children) {
     }
     Copy-Item -Path $child -Destination $Distination -Force
 }
+
+New-PSDrive -PSProvider "registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR"
+Set-Location -LiteralPath $RegistryShellRoot
+New-Item $RegistryShellAppRootName -Force
+Set-Location -LiteralPath $RegistryShellAppRootName
+Write-Output (Get-Location)
+$Here = (Get-Location) -replace "HKCR:", "HKEY_CLASSES_ROOT"
+Write-Output $Here
+[Microsoft.Win32.Registry]::SetValue($Here, "MUIVerbs", "BoostMenu", [Microsoft.Win32.RegistryValueKind]::String)
+[Microsoft.Win32.Registry]::SetValue($Here, "SubCommands", "", [Microsoft.Win32.RegistryValueKind]::String)
+[Microsoft.Win32.Registry]::SetValue($Here, "Icon", "$env:ProgramFiles\7-Zip\7z.dll,0", [Microsoft.Win32.RegistryValueKind]::ExpandString)
+New-Item "shell" -Force
+Set-Location "shell"
+New-Item $RegistryShellAppCommandMultiZipName -Force
+New-Item $RegistryShellAppCommandMultiZipWithPasswordName -Force
+New-Item $RegistryShellAppCommandMulti7zName -Force
+New-Item $RegistryShellAppCommandMulti7zWithPasswordName -Force
+foreach ($item in $(Get-ChildItem)) {
+    Set-Location (Split-Path $item.Name -Leaf)
+    New-Item "command" -Force
+    Set-Location ..
+}
+Set-Location $HerePath
 
 $finishTitle = "7zip Multi"
 $finishMessage = 'Install Finished, Celebrate!'
