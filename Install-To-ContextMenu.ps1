@@ -82,3 +82,5 @@ else {
     $ws = New-Object -com Wscript.Shell
     $ws.Popup($finishMessage, 0, $finishTitle, 0)
 }
+
+Remove-PSDrive -Name "HKCR" -Force
