@@ -26,10 +26,10 @@ foreach ($child in $children) {
     Copy-Item -Path $child -Destination $Distination -Force
 }
 
-New-PSDrive -PSProvider "registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR"
+New-PSDrive -PSProvider "registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR" -Scope Script
 Set-Location -LiteralPath $RegistryShellRoot
 New-Item $RegistryShellAppRootName -Force
-Set-Location -LiteralPath $RegistryShellAppRootName
+Set-Location $RegistryShellAppRootName
 $Here = (Get-Location) -replace "HKCR:", "HKEY_CLASSES_ROOT"
 [Microsoft.Win32.Registry]::SetValue($Here, "MUIVerbs", "BoostMenu", [Microsoft.Win32.RegistryValueKind]::String)
 [Microsoft.Win32.Registry]::SetValue($Here, "SubCommands", "", [Microsoft.Win32.RegistryValueKind]::String)
@@ -45,6 +45,13 @@ foreach ($item in $(Get-ChildItem)) {
     New-Item "command" -Force
     Set-Location ..
 }
+$Here = (Get-Location) -replace "HKCR:", "HKEY_CLASSES_ROOT"
+$DistinationBack = $Distination -replace "/","\"
+[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMultiZipName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make Zip from Files .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
+[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMultiZipWithPasswordName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make Zip from Files with Password .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
+[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMulti7zName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
+[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMulti7zWithPasswordName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files with Password .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
+
 Set-Location $HerePath
 
 $finishTitle = "7zip Multi"
