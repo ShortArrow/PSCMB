@@ -20,7 +20,7 @@ else {
 # Get Children
 $children = Get-ChildItem $HerePath
 foreach ($child in $children) {
-    if ((Split-Path $child -Extension) -eq ".cmd") {
+    if (!$child.PSIsContainer -and $child.Extension -eq ".cmd") {
         Copy-Item -Path $child -Destination $SendtoPath -Force
     }
     Copy-Item -Path $child -Destination $Distination -Force
