@@ -9,6 +9,7 @@ $RegistryShellAppCommandMultiZipName = "Make zips"
 $RegistryShellAppCommandMultiZipWithPasswordName = "Make zips with password"
 $RegistryShellAppCommandMulti7zName = "Make 7zips"
 $RegistryShellAppCommandMulti7zWithPasswordName = "Make 7zips with password"
+$RegistryShellAppCommandMakeListName = "Make List to Clip"
 
 $url = "https://github.com/zenden2k/context-menu-launcher/releases/latest/download/singleinstance.exe"
 $singleinstancefile = "./SingleInstance/singleinstance.exe"
@@ -47,6 +48,7 @@ New-Item $RegistryShellAppCommandMultiZipName -Force
 New-Item $RegistryShellAppCommandMultiZipWithPasswordName -Force
 New-Item $RegistryShellAppCommandMulti7zName -Force
 New-Item $RegistryShellAppCommandMulti7zWithPasswordName -Force
+New-Item $RegistryShellAppCommandMakeListName -Force
 foreach ($item in $(Get-ChildItem)) {
     Set-Location (Split-Path $item.Name -Leaf)
     New-Item "command" -Force
@@ -58,6 +60,7 @@ $DistinationBack = $Distination -replace "/", "\"
 [Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMultiZipWithPasswordName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make Zip from Files with Password .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
 [Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMulti7zName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
 [Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMulti7zWithPasswordName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files with Password .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
+[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMakeListName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make List from Files .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
 
 Set-Location $HerePath
 
