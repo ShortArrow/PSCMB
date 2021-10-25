@@ -64,7 +64,7 @@ $DistinationBack = $Distination -replace "/", "\"
 
 Set-Location $HerePath
 
-if (Test-Path $file) {
+if (Test-Path $singleinstancefile) {
     Copy-Item -Destination "$Distination\SingleInstance" -LiteralPath $singleinstancefile -Force
 }
 
