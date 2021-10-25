@@ -10,6 +10,13 @@ $RegistryShellAppCommandMultiZipWithPasswordName = "Make zips with password"
 $RegistryShellAppCommandMulti7zName = "Make 7zips"
 $RegistryShellAppCommandMulti7zWithPasswordName = "Make 7zips with password"
 
+$url = "https://github.com/zenden2k/context-menu-launcher/releases/latest/download/singleinstance.exe"
+$singleinstancefile = "./SingleInstance/singleinstance.exe"
+if (!(Test-Path $singleinstancefile)) {
+    New-Item SingleInstance -Force -ItemType Directory
+    Invoke-WebRequest -Uri $url -OutFile $singleinstancefile
+} 
+
 if (Test-Path $Distination) {
 
 }
@@ -46,13 +53,17 @@ foreach ($item in $(Get-ChildItem)) {
     Set-Location ..
 }
 $Here = (Get-Location) -replace "HKCR:", "HKEY_CLASSES_ROOT"
-$DistinationBack = $Distination -replace "/","\"
+$DistinationBack = $Distination -replace "/", "\"
 [Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMultiZipName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make Zip from Files .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
 [Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMultiZipWithPasswordName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make Zip from Files with Password .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
 [Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMulti7zName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
 [Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMulti7zWithPasswordName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files with Password .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::ExpandString)
 
 Set-Location $HerePath
+
+if (Test-Path $file) {
+    Copy-Item -Destination "$Distination\SingleInstance" -LiteralPath $singleinstancefile -Force
+}
 
 $finishTitle = "7zip Multi"
 $finishMessage = 'Install Finished, Celebrate!'
