@@ -3,12 +3,12 @@ $HerePath = (Get-Location).Path
 # Get distination path
 $Distination = "$env:USERPROFILE/Documents/CustomContextMenu"
 $SendtoPath = "$env:APPDATA/Microsoft/Windows/SendTo"
-$RegistryShellRoot = "HKEY_CLASSES_ROOT/*/shell/"
-$RegistryShellAppRoot = Join-Path $RegistryShellRoot -ChildPath "./PSCMB/"
-$RegistryShellAppCommandMultiZip = Join-Path $RegistryShellAppRoot -ChildPath "./Multi zip/"
-$RegistryShellAppCommandMultiZipWithPassword = Join-Path $RegistryShellAppRoot -ChildPath "./Multi zip with password/"
-$RegistryShellAppCommandMulti7z = Join-Path $RegistryShellAppRoot -ChildPath "./Multi 7z/"
-$RegistryShellAppCommandMulti7zWithPassword = Join-Path $RegistryShellAppRoot -ChildPath "./Multi 7z with password/"
+$RegistryShellRoot = "Registry::HKEY_CURRENT_ROOT/*/shell"
+$RegistryShellAppRoot = Join-Path $RegistryShellRoot -ChildPath "PSCMB"
+$RegistryShellAppCommandMultiZip = Join-Path $RegistryShellAppRoot -ChildPath "Multi zip"
+$RegistryShellAppCommandMultiZipWithPassword = Join-Path $RegistryShellAppRoot -ChildPath "Multi zip with password"
+$RegistryShellAppCommandMulti7z = Join-Path $RegistryShellAppRoot -ChildPath "Multi 7z"
+$RegistryShellAppCommandMulti7zWithPassword = Join-Path $RegistryShellAppRoot -ChildPath "Multi 7z with password"
 
 if (Test-Path $Distination) {
 
