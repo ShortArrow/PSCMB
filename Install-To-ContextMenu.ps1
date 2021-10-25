@@ -30,9 +30,7 @@ New-PSDrive -PSProvider "registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR"
 Set-Location -LiteralPath $RegistryShellRoot
 New-Item $RegistryShellAppRootName -Force
 Set-Location -LiteralPath $RegistryShellAppRootName
-Write-Output (Get-Location)
 $Here = (Get-Location) -replace "HKCR:", "HKEY_CLASSES_ROOT"
-Write-Output $Here
 [Microsoft.Win32.Registry]::SetValue($Here, "MUIVerbs", "BoostMenu", [Microsoft.Win32.RegistryValueKind]::String)
 [Microsoft.Win32.Registry]::SetValue($Here, "SubCommands", "", [Microsoft.Win32.RegistryValueKind]::String)
 [Microsoft.Win32.Registry]::SetValue($Here, "Icon", "$env:ProgramFiles\7-Zip\7z.dll,0", [Microsoft.Win32.RegistryValueKind]::ExpandString)
