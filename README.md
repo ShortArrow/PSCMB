@@ -12,14 +12,21 @@ This software extends the Windows context menu. And a tool created with powershe
 ## Installation
 
 Download archive from release page, And unzip.
-Then, please run `./bin/Install-To-ContextMenu.ps1`.
+Then, please run `./bin/install.cmd`.
+
+## Uninstallation
+
+Download archive from release page, And unzip.
+Then, please run `./bin/uninstall.cmd`.
 
 ## Contribute
 
 First action is `git clone`.
+
 Run `cd BurntToast`.
-Run as described below.
-```
+And run as described below, to get BurntToast.
+
+```bash
 git init BurntToast
 git config core.sparsecheckout true
 git remote add origin https://github.com/Windos/BurntToast.git
@@ -27,13 +34,32 @@ echo BurntToast > .git/info/sparse-checkout
 git pull origin main 
 ```
 
+Next, get process instance manager, like this.
+
+```powershell
+mkdir SingleInstance
+$url = https://github.com/zenden2k/context-menu-launcher/releases/latest/download/singleinstance.exe
+$file = ./SingleInstance/singleinstance.exe
+Invoke-WebRequest -Uri $url -OutFile $file
+```
+
+Or this.
+
+```bash
+mkdir SingleInstance
+if curl -s -L "https://github.com/zenden2k/context-menu-launcher/releases/latest/download/singleinstance.exe" -o "./SingleInstance/singleinstance.exe"; then
+    echo downloaded
+fi
+```
+
 ## Usage
 
-Select multiple files and select "Send" from the right-click menu.
+Select multiple files and select Menu from the right-click menu, like demo after bellow.
 
 ### Demo
 
 ![img](Demo.png)
+![img](Demo2.png)
 
 ## Author
 
