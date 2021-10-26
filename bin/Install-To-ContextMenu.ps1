@@ -1,3 +1,4 @@
+Set-Location ..
 # Where is this folder
 $HerePath = (Get-Location).Path
 # Get distination path
