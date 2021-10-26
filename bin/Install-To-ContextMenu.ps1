@@ -4,13 +4,117 @@ $HerePath = (Get-Location).Path
 # Get distination path
 $Distination = "$env:USERPROFILE/Documents/CustomContextMenu"
 $SendtoPath = "$env:APPDATA/Microsoft/Windows/SendTo"
+$DistinationBack = $Distination -replace "/", "\"
 $RegistryShellRoot = "HKCR:/*/shell"
-$RegistryShellAppRootName = "PSCMB"
-$RegistryShellAppCommandMultiZipName = "Make zips"
-$RegistryShellAppCommandMultiZipWithPasswordName = "Make zips with password"
-$RegistryShellAppCommandMulti7zName = "Make 7zips"
-$RegistryShellAppCommandMulti7zWithPasswordName = "Make 7zips with password"
-$RegistryShellAppCommandMakeListName = "Make List to Clip"
+
+$RegistryDictionary = @{
+    "PSCMB" = @{
+        isContainer        = $true;
+        "MUIVerbs"         = @{
+            isContainer       = $false;
+            Name              = "BoostMenu";
+            RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+        };
+        "SubCommands"      = @{
+            isContainer       = $false;
+            Name              = ""; 
+            RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+        };
+        "Icon"             = @{
+            isContainer       = $false;
+            Name              = "$env:ProgramFiles\7-Zip\7z.dll,0";
+            RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::ExpandString;
+        };
+        "MultiSelectModel" = @{
+            isContainer       = $false;
+            Name              = "Player";
+            RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+        };
+        "shell"            = @{
+            isContainer                = $true;
+            "Make zips"                = @{
+                isContainer        = $true;
+                "MultiSelectModel" = @{
+                    isContainer       = $false;
+                    Name              = "Player";
+                    RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                };
+                "command"          = @{
+                    isContainer = $true;
+                    "at"        = @{
+                        isContainer       = $false;
+                        Name              = '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make Zip from Files .cmd" $files  --si-timeout 400';
+                        RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                    };
+                };
+            };
+            "Make zips with password"  = @{
+                isContainer        = $true;
+                "MultiSelectModel" = @{
+                    isContainer       = $false;
+                    Name              = "Player";
+                    RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                };
+                "command"          = @{
+                    isContainer = $true;
+                    "at"        = @{
+                        isContainer       = $false;
+                        Name              = '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make Zip from Files with Password .cmd" $files  --si-timeout 400';
+                        RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                    };
+                };
+            };
+            "Make 7zips"               = @{
+                isContainer        = $true;
+                "MultiSelectModel" = @{
+                    isContainer       = $false;
+                    Name              = "Player";
+                    RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                };
+                "command"          = @{
+                    isContainer = $true;
+                    "at"        = @{
+                        isContainer       = $false;
+                        Name              = '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files .cmd" $files  --si-timeout 400';
+                        RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                    };
+                };
+            };
+            "Make 7zips with password" = @{
+                isContainer        = $true;
+                "MultiSelectModel" = @{
+                    isContainer       = $false;
+                    Name              = "Player";
+                    RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                };
+                "command"          = @{
+                    isContainer = $true;
+                    "at"        = @{
+                        isContainer       = $false;
+                        Name              = '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files with Password .cmd" $files  --si-timeout 400';
+                        RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                    };
+                };
+            };
+            "Make List to Clip"        = @{
+                isContainer        = $true;
+                "MultiSelectModel" = @{
+                    isContainer       = $false;
+                    Name              = "Player";
+                    RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                };
+                "command"          = @{
+                    isContainer = $true;
+                    "at"        = @{
+                        isContainer       = $false;
+                        Name              = '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make List from Files .cmd" $files  --si-timeout 400';
+                        RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                    };
+                };
+            };
+        };
+    };
+}
 
 $url = "https://github.com/zenden2k/context-menu-launcher/releases/latest/download/singleinstance.exe"
 $singleinstancefile = "./SingleInstance/singleinstance.exe"
@@ -35,36 +139,43 @@ foreach ($child in $children) {
     Copy-Item -Path $child -Destination $Distination -Force
 }
 
+function Set-Entry {
+    param (
+        [hashtable]
+        $Entry,
+        [string]
+        $Name
+    )
+    if ($Name -eq "isContainer") {
+        
+    }
+    else {
+        if ($Entry.isContainer) {
+            New-Item $Name -Force
+            Set-Location $Name
+            $Entry.Keys | ForEach-Object {
+                if ($_ -ne "isContainer") {
+                    Set-Entry -Entry $Entry.$_ -Name $_
+                }
+                Write-Host $_
+            }
+            Set-Location ..
+        }
+        else {
+            $Here = (Get-Location) -replace "HKCR:", "HKEY_CLASSES_ROOT"
+            [Microsoft.Win32.Registry]::SetValue(
+                $Here, 
+                (($Name -eq "at") ? "":$Name), 
+                $Entry.Name,
+                $Entry.RegistryValueKind
+            )
+        }
+    }
+}
+
 New-PSDrive -PSProvider "registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR" -Scope Script
 Set-Location -LiteralPath $RegistryShellRoot
-New-Item $RegistryShellAppRootName -Force
-Set-Location $RegistryShellAppRootName
-$Here = (Get-Location) -replace "HKCR:", "HKEY_CLASSES_ROOT"
-[Microsoft.Win32.Registry]::SetValue($Here, "MUIVerbs", "BoostMenu", [Microsoft.Win32.RegistryValueKind]::String)
-[Microsoft.Win32.Registry]::SetValue($Here, "SubCommands", "", [Microsoft.Win32.RegistryValueKind]::String)
-[Microsoft.Win32.Registry]::SetValue($Here, "Icon", "$env:ProgramFiles\7-Zip\7z.dll,0", [Microsoft.Win32.RegistryValueKind]::ExpandString)
-[Microsoft.Win32.Registry]::SetValue($Here, "MultiSelectModel", "Player", [Microsoft.Win32.RegistryValueKind]::String)
-New-Item "shell" -Force
-Set-Location "shell"
-New-Item $RegistryShellAppCommandMultiZipName -Force
-New-Item $RegistryShellAppCommandMultiZipWithPasswordName -Force
-New-Item $RegistryShellAppCommandMulti7zName -Force
-New-Item $RegistryShellAppCommandMulti7zWithPasswordName -Force
-New-Item $RegistryShellAppCommandMakeListName -Force
-foreach ($item in $(Get-ChildItem)) {
-    Set-Location (Split-Path $item.Name -Leaf)
-    $Here = (Get-Location) -replace "HKCR:", "HKEY_CLASSES_ROOT"
-    [Microsoft.Win32.Registry]::SetValue($Here, "MultiSelectModel", "Player", [Microsoft.Win32.RegistryValueKind]::String)
-    New-Item "command" -Force
-    Set-Location ..
-}
-$Here = (Get-Location) -replace "HKCR:", "HKEY_CLASSES_ROOT"
-$DistinationBack = $Distination -replace "/", "\"
-[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMultiZipName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make Zip from Files .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::String)
-[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMultiZipWithPasswordName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make Zip from Files with Password .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::String)
-[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMulti7zName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::String)
-[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMulti7zWithPasswordName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make 7z from Files with Password .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::String)
-[Microsoft.Win32.Registry]::SetValue("$Here\$RegistryShellAppCommandMakeListName\command", "", '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make List from Files .cmd" $files  --si-timeout 400', [Microsoft.Win32.RegistryValueKind]::String)
+$RegistryDictionary.Keys | ForEach-Object { Set-Entry -Entry $RegistryDictionary.$_ -Name $_ }
 
 Set-Location $HerePath
 
