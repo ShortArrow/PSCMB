@@ -4,6 +4,31 @@
 
 This software extends the Windows context menu. And a tool created with powershell. We are aiming for something as powerful as the right head of Cerberus.
 
+## Features
+
+These features can use from PSCMB or SendTo on contextmenu.
+Let me know if you come up with a convenient and versatile right-click feature. I would appreciate it if you could make a pull request.
+
+### Make multi zips
+
+Create multiple zip files from multiple files.If it is only 7z, it will be one zip file. However, this will create a zip file with the same qty as the original file.
+
+### Make multi zips with password
+
+Create multiple zip files from multiple files with a password.
+
+### Make multi 7zips
+
+Create multiple 7zip files from multiple files.If it is only 7z, it will be one 7zip file. However, this will create a 7zip file with the same qty as the original file.
+
+### Make multi 7zips with password
+
+Create multiple 7zip files from multiple files with a password.
+
+### Copy filenames to clipboard
+
+Copy multiple filenames to the clipboard. Great for pasting a list of files into Excel, Google Sheets, etc.
+
 ## Requirement
 
 * Powershell 6 or Later
