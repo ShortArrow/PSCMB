@@ -8,20 +8,23 @@ This software extends the Windows context menu. And a tool created with powershe
 
 * Powershell 6 or Later
 * Windows 10 or Later
+* 7Zip
 
 ## Installation
 
 Download archive from release page, And unzip.
-Then, please run `./bin/install.cmd`.
+Then, please run `./bin/install.cmd` or `install.lnk`
 
 ## Uninstallation
 
 Download archive from release page, And unzip.
-Then, please run `./bin/uninstall.cmd`.
+Then, please run `./bin/uninstall.cmd` or `uninstall.lnk`
 
 ## Contribute
 
 First action is `git clone`.
+
+### BurntToast
 
 Run `cd BurntToast`.
 And run as described below, to get BurntToast.
@@ -34,7 +37,9 @@ echo BurntToast > .git/info/sparse-checkout
 git pull origin main 
 ```
 
-Next, get process instance manager, like this.
+### context-menu-launcher
+
+Get process instance manager, like this.
 
 ```powershell
 mkdir SingleInstance
@@ -52,6 +57,16 @@ if curl -s -L "https://github.com/zenden2k/context-menu-launcher/releases/latest
 fi
 ```
 
+### 7zip
+
+please install 7zip and add to `path` environment variable.
+
+if you use chocolatey you can install just as bellow.
+
+```powershell
+choco install 7zip
+```
+
 ## Usage
 
 Select multiple files and select Menu from the right-click menu, like demo after bellow.
@@ -63,7 +78,7 @@ Select multiple files and select Menu from the right-click menu, like demo after
 
 ## Author
 
-@ShortArrow
+[@ShortArrow](@ShortArrow)
 
 ## License
 
@@ -77,3 +92,10 @@ First action is `git clone`. next, as described below.
 git tag -a v1.0.0 -m 'version 1.0.0'
 git push origin v1.0.0
 ```
+
+## Dependency
+
+- [Powershell](https://github.com/PowerShell/PowerShell)
+- [BurntToast](https://github.com/Windos/BurntToast)
+- [context-menu-launcher](https://github.com/zenden2k/context-menu-launcher)
+- [7z](https://sourceforge.net/projects/sevenzip/files/7-Zip/)
