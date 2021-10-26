@@ -78,7 +78,7 @@ Select multiple files and select Menu from the right-click menu, like demo after
 
 ## Author
 
-[@ShortArrow](@ShortArrow)
+[@ShortArrow](https://github.com/ShortArrow)
 
 ## License
 
