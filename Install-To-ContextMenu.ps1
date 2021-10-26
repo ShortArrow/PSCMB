@@ -88,4 +88,4 @@ else {
 
 Remove-PSDrive -Name "HKCR" -Force
 
-Write-Host "Finish Setup"
+Write-Host "Finish Setup" -ForegroundColor White -BackgroundColor Green
