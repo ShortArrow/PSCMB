@@ -6,6 +6,7 @@ $Distination = "$env:USERPROFILE/Documents/CustomContextMenu"
 $SendtoPath = "$env:APPDATA/Microsoft/Windows/SendTo"
 $DistinationBack = $Distination -replace "/", "\"
 $RegistryShellRoot = "HKCR:/*/shell"
+$RegistryShellRootForDir = "HKCR:/Directory/shell"
 
 $RegistryDictionary = @{
     "PSCMB" = @{
@@ -31,8 +32,8 @@ $RegistryDictionary = @{
             RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
         };
         "shell"            = @{
-            isContainer                = $true;
-            "Make zips"                = @{
+            isContainer                            = $true;
+            "Make zips"                            = @{
                 isContainer        = $true;
                 "MultiSelectModel" = @{
                     isContainer       = $false;
@@ -48,7 +49,7 @@ $RegistryDictionary = @{
                     };
                 };
             };
-            "Make zips with password"  = @{
+            "Make zips with password"              = @{
                 isContainer        = $true;
                 "MultiSelectModel" = @{
                     isContainer       = $false;
@@ -64,7 +65,7 @@ $RegistryDictionary = @{
                     };
                 };
             };
-            "Make 7zips"               = @{
+            "Make 7zips"                           = @{
                 isContainer        = $true;
                 "MultiSelectModel" = @{
                     isContainer       = $false;
@@ -80,7 +81,7 @@ $RegistryDictionary = @{
                     };
                 };
             };
-            "Make 7zips with password" = @{
+            "Make 7zips with password"             = @{
                 isContainer        = $true;
                 "MultiSelectModel" = @{
                     isContainer       = $false;
@@ -96,7 +97,7 @@ $RegistryDictionary = @{
                     };
                 };
             };
-            "Make List to Clip"        = @{
+            "Make List to Clip"                    = @{
                 isContainer        = $true;
                 "MultiSelectModel" = @{
                     isContainer       = $false;
@@ -112,7 +113,7 @@ $RegistryDictionary = @{
                     };
                 };
             };
-            "Make List to Clip without Extensions"        = @{
+            "Make List to Clip without Extensions" = @{
                 isContainer        = $true;
                 "MultiSelectModel" = @{
                     isContainer       = $false;
@@ -184,13 +185,15 @@ function Set-Entry {
                 (($Name -eq "at") ? "":$Name), 
                 $Entry.Name,
                 $Entry.RegistryValueKind
-            )
+                )
+            }
         }
     }
-}
-
+    
 New-PSDrive -PSProvider "registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR" -Scope Script
 Set-Location -LiteralPath $RegistryShellRoot
+$RegistryDictionary.Keys | ForEach-Object { Set-Entry -Entry $RegistryDictionary.$_ -Name $_ }
+Set-Location -LiteralPath $RegistryShellRootForDir
 $RegistryDictionary.Keys | ForEach-Object { Set-Entry -Entry $RegistryDictionary.$_ -Name $_ }
 
 Set-Location $HerePath
