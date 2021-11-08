@@ -112,6 +112,22 @@ $RegistryDictionary = @{
                     };
                 };
             };
+            "Make List to Clip without Extensions"        = @{
+                isContainer        = $true;
+                "MultiSelectModel" = @{
+                    isContainer       = $false;
+                    Name              = "Player";
+                    RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                };
+                "command"          = @{
+                    isContainer = $true;
+                    "at"        = @{
+                        isContainer       = $false;
+                        Name              = '"' + $DistinationBack + '\SingleInstance\singleinstance.exe" "%1" "' + $DistinationBack + '\Make List from Files without Extensions .cmd" $files  --si-timeout 400';
+                        RegistryValueKind = [Microsoft.Win32.RegistryValueKind]::String;
+                    };
+                };
+            };
         };
     };
 }
