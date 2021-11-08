@@ -7,7 +7,8 @@ $DeleteFiles = @(
     "Make 7z from Files with Password .cmd",
     "Make List from Files .cmd",
     "Make Zip from Files .cmd",
-    "Make Zip from Files with Password .cmd"
+    "Make Zip from Files with Password .cmd",
+    "Make List from Files without Extensions .cmd"
 )
 foreach ($item in $DeleteFiles) {
     Remove-Item (Join-Path $SendtoPath -ChildPath $item) -Force
