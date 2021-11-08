@@ -1,3 +1,4 @@
 @echo off
-pwsh -NoProfile -ExecutionPolicy Unrestricted "%userprofile%\Documents\CustomContextMenu\ClipBoardArg.ps1" %*
+cd /d "%userprofile%\Documents\CustomContextMenu\"
+pwsh -NoProfile -ExecutionPolicy Unrestricted ClipBoardArg.ps1 %*
 exit
