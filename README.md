@@ -171,3 +171,10 @@ git push origin v1.0.0
 - [BurntToast](https://github.com/Windos/BurntToast)
 - [context-menu-launcher](https://github.com/zenden2k/context-menu-launcher)
 - [7z](https://sourceforge.net/projects/sevenzip/files/7-Zip/)
+
+### Special thanks
+
+- [@Windos](https://github.com/Windos)
+    - [BurntToast](https://github.com/Windos/BurntToast) Owner
+- [@zenden2k](https://github.com/zenden2k)
+    - [context-menu-launcher](https://github.com/zenden2k/context-menu-launcher) Owner
