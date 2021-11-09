@@ -19,7 +19,7 @@ The basics are the same as the above command, and you can also assign a password
 
 ### Make multi 7zips
 
-Create multiple 7zip files from multiple files.If it is only 7z, it will be one 7zip file. However, this will create a 7zip file with the same qty as the original file.
+Create multiple 7zip files from multiple files or folders. This will create a 7zip file with the same qty as the original file or folder selected at run.
 
 ### Make multi 7zips with password
 
