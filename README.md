@@ -30,19 +30,19 @@ Create multiple 7zip files from multiple files with a password.
 Copy multiple names of selected files or folders to the clipboard. Great for pasting a list into Excel, Google spread sheets, etc. like as bellow.
 
 ```
-./test.txt
-./docs/
-./index.html
-./overview.html
+C:/Users/who/Documents/example/test.txt
+C:/Users/who/Documents/example/docs/
+C:/Users/who/Documents/example/index.html
+C:/Users/who/Documents/example/overview.html
 ```
 
 inside of clipboard after this command :
 
 ```
-test
+test.txt
 docs
-index
-overview
+index.html
+overview.html
 ```
 
 ### Copy names of files or folders to clipboard without extensions
@@ -52,10 +52,10 @@ Copy multiple names of selected files or folders to the clipboard. and then with
 target files :
 
 ```
-./test.txt
-./docs/
-./index.html
-./overview.html
+C:/Users/who/Documents/example/test.txt
+C:/Users/who/Documents/example/docs/
+C:/Users/who/Documents/example/index.html
+C:/Users/who/Documents/example/overview.html
 ```
 
 inside of clipboard after this command :
