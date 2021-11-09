@@ -15,7 +15,7 @@ Create multiple zip files from multiple files or folders. This will create a zip
 
 ### Make multi zips with password
 
-Create multiple zip files from multiple files with a password.
+The basics are the same as the above command, and you can also assign a password.
 
 ### Make multi 7zips
 
@@ -23,7 +23,7 @@ Create multiple 7zip files from multiple files.If it is only 7z, it will be one 
 
 ### Make multi 7zips with password
 
-Create multiple 7zip files from multiple files with a password.
+The basics are the same as the above command, and you can also assign a password.
 
 ### Copy names of files or folders to clipboard
 
