@@ -11,7 +11,7 @@ Let me know if you come up with a convenient and versatile right-click feature. 
 
 ### Make multi zips
 
-Create multiple zip files from multiple files.If it is only 7z, it will be one zip file. However, this will create a zip file with the same qty as the original file.
+Create multiple zip files from multiple files or folders. This will create a zip file with the same qty as the original file or folder selected at run.
 
 ### Make multi zips with password
 
