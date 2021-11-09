@@ -25,9 +25,9 @@ Create multiple 7zip files from multiple files.If it is only 7z, it will be one 
 
 Create multiple 7zip files from multiple files with a password.
 
-### Copy filenames to clipboard
+### Copy names of files or folders to clipboard
 
-Copy multiple filenames to the clipboard. Great for pasting a list of files into Excel, Google Sheets, etc.
+Copy multiple names of selected files or folders to the clipboard. Great for pasting a list into Excel, Google spread sheets, etc.
 
 ## Requirement
 
