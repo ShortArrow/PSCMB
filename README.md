@@ -1,31 +1,31 @@
 # README
 
-## PSCMB (Powershell Context Menu Booster)
+## **PSCMB** (Powershell Context Menu Booster)
 
 This software extends the Windows context menu. And a tool created with powershell. We are aiming for something as powerful as the right head of Cerberus.
 
-## Features
+## **Features**
 
 These features can use from PSCMB or SendTo on contextmenu.
 Let me know if you come up with a convenient and versatile right-click feature. I would appreciate it if you could make a pull request.
 
-### Make multi zips
+### **Make multi zips**
 
 Create multiple zip files from multiple files or folders. This will create a zip file with the same qty as the original file or folder selected at run.
 
-### Make multi zips with password
+### **Make multi zips with password**
 
 The basics are the same as the above command, and you can also assign a password.
 
-### Make multi 7zips
+### **Make multi 7zips**
 
 Create multiple 7zip files from multiple files or folders. This will create a 7zip file with the same qty as the original file or folder selected at run.
 
-### Make multi 7zips with password
+### **Make multi 7zips with password**
 
 The basics are the same as the above command, and you can also assign a password.
 
-### Copy names of files or folders to clipboard
+### **Copy names of files or folders to clipboard**
 
 Copy multiple names of selected files or folders to the clipboard. Great for pasting a list into Excel, Google spread sheets, etc. like as bellow.
 
@@ -45,7 +45,7 @@ index.html
 overview.html
 ```
 
-### Copy names of files or folders to clipboard without extensions
+### **Copy names of files or folders to clipboard without extensions**
 
 Copy multiple names of selected files or folders to the clipboard. and then without extensions. like as bellow.
 
@@ -67,27 +67,27 @@ index
 overview
 ```
 
-## Requirement
+## **Requirement**
 
 * Powershell 6 or Later
 * Windows 10 or Later
 * 7Zip
 
-## Installation
+## **Installation**
 
 Download archive from release page, And unzip.
 Then, please run `./bin/install.cmd` with administrator privileges or `install.lnk`
 
-## Uninstallation
+## **Uninstallation**
 
 Download archive from release page, And unzip.
 Then, please run `./bin/uninstall.cmd` with administrator privileges or `uninstall.lnk`
 
-## Contribute
+## **Contribute**
 
 First action is `git clone`.
 
-### BurntToast
+### **BurntToast**
 
 Run `cd BurntToast`.
 And run as described below, to get BurntToast.
@@ -100,7 +100,7 @@ echo BurntToast > .git/info/sparse-checkout
 git pull origin main 
 ```
 
-### context-menu-launcher
+### **context-menu-launcher**
 
 Get process instance manager, like this.
 
@@ -120,7 +120,7 @@ if curl -s -L "https://github.com/zenden2k/context-menu-launcher/releases/latest
 fi
 ```
 
-### 7zip
+### **7zip**
 
 please install 7zip and add to `path` environment variable.
 
@@ -130,11 +130,11 @@ if you use chocolatey you can install just as bellow.
 choco install 7zip
 ```
 
-## Usage
+## **Usage**
 
 Select multiple files and select Menu from the right-click menu, like demo after bellow.
 
-### Demo
+### **Demo**
 
 #### for files context menu
 
@@ -148,15 +148,15 @@ Select multiple files and select Menu from the right-click menu, like demo after
 
 ![img](img\demo_sendto.png)
 
-## Author
+## **Author**
 
 [@ShortArrow](https://github.com/ShortArrow)
 
-## License
+## **License**
 
 Under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
 
-## Release
+## **Release**
 
 First action is `git clone`. next, as described below.
 
@@ -165,14 +165,16 @@ git tag -a v1.0.0 -m 'version 1.0.0'
 git push origin v1.0.0
 ```
 
-## Dependency
+Then added tag, run github actions. add `release.zip` to releases page.
+
+## **Dependency**
 
 - [Powershell](https://github.com/PowerShell/PowerShell)
 - [BurntToast](https://github.com/Windos/BurntToast)
 - [context-menu-launcher](https://github.com/zenden2k/context-menu-launcher)
 - [7z](https://sourceforge.net/projects/sevenzip/files/7-Zip/)
 
-### Special thanks
+### **Special thanks**
 
 - [@Windos](https://github.com/Windos)
     - [BurntToast](https://github.com/Windos/BurntToast) Owner
