@@ -138,15 +138,15 @@ Select multiple files and select Menu from the right-click menu, like demo after
 
 #### for files context menu
 
-![img](img\demo_forfiles.png)
+![img](img/demo_forfiles.png)
 
 #### for folders context menu
 
-![img](img\demo_forfolders.png)
+![img](img/demo_forfolders.png)
 
 #### for sendto context menu
 
-![img](img\demo_sendto.png)
+![img](img/demo_sendto.png)
 
 ## **Author**
 
