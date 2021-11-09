@@ -76,12 +76,12 @@ overview
 ## Installation
 
 Download archive from release page, And unzip.
-Then, please run `./bin/install.cmd` or `install.lnk`
+Then, please run `./bin/install.cmd` with administrator privileges or `install.lnk`
 
 ## Uninstallation
 
 Download archive from release page, And unzip.
-Then, please run `./bin/uninstall.cmd` or `uninstall.lnk`
+Then, please run `./bin/uninstall.cmd` with administrator privileges or `uninstall.lnk`
 
 ## Contribute
 
