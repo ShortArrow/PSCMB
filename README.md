@@ -27,7 +27,45 @@ Create multiple 7zip files from multiple files with a password.
 
 ### Copy names of files or folders to clipboard
 
-Copy multiple names of selected files or folders to the clipboard. Great for pasting a list into Excel, Google spread sheets, etc.
+Copy multiple names of selected files or folders to the clipboard. Great for pasting a list into Excel, Google spread sheets, etc. like as bellow.
+
+```
+./test.txt
+./docs/
+./index.html
+./overview.html
+```
+
+inside of clipboard after this command :
+
+```
+test
+docs
+index
+overview
+```
+
+### Copy names of files or folders to clipboard without extensions
+
+Copy multiple names of selected files or folders to the clipboard. and then without extensions. like as bellow.
+
+target files :
+
+```
+./test.txt
+./docs/
+./index.html
+./overview.html
+```
+
+inside of clipboard after this command :
+
+```
+test
+docs
+index
+overview
+```
 
 ## Requirement
 
